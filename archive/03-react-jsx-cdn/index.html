@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        name="viewport">
+  <meta content="ie=edge" http-equiv="X-UA-Compatible">
+  <title>Document</title>
+
+  <style>
+    .btn-info {
+      background-color: blue;
+      color: white;
+    }
+  </style>
+
+</head>
+<body>
+
+<div id="root"></div>
+
+<!--<div id="vanilla-js">-->
+<!--  <button id="button" onclick="changeButtonText('button')">Click me</button>-->
+<!--</div>-->
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+
+  console.log(React)
+  console.log(ReactDOM)
+
+  // const headerElement = React.createElement('h1', null, 'Hello React world!');
+  const headerElement = (
+      <div>
+        <h1>Hello React world!</h1>
+        <h1>Hello React world!</h1>
+      </div>
+  )
+
+  // ! 1 children
+  // React.createElement("div", { title: "title" }, React.createElement("h1", null, "Hello from React"));
+
+  // ! 2 children
+  // React.createElement(
+  //     "div", // 1st argument
+  //     { title: "title" }, // 2nd argument
+  //     React.createElement("h1", null, "Hello from React"), // 3rd argument
+  //     React.createElement("h1", null, "Hello from React") // 4th argument
+  // );
+
+  console.log(headerElement)
+
+  const container = document.getElementById('root');
+  const root = ReactDOM.createRoot(container)
+
+  root.render(headerElement)
+
+  // const changeButtonText = (elementId) => {
+  //   const btn = document.getElementById(elementId);
+  //   btn.innerHTML = 'Hello vanilla JS!';
+  //   btn.className = 'btn-info';
+  // }
+  //
+  // const headerElement = document.createElement('h1');
+  // headerElement.innerHTML = 'Hello vanilla world!';
+  // document.getElementById('vanilla-js').append(headerElement);
+
+
+</script>
+
+</body>
+</html>

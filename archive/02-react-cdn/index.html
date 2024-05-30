@@ -19,38 +19,36 @@
 
 <div id="root"></div>
 
+<!--<div id="vanilla-js">-->
+<!--  <button id="button" onclick="changeButtonText('button')">Click me</button>-->
+<!--</div>-->
+
 <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-<script type="text/babel">
+<script>
 
-  React.createElement(
-      'h1', null, 'Hello from React',
-      React.createElement('h1', null, 'Hello from React')
-  );
-  const App = () => {
-    const [buttonText, setButtonText] = React.useState('Click me from useState')
+  console.log(React)
+  console.log(ReactDOM)
 
-    const onClickHandler = () => {
-      setButtonText(`React clicked! ${Math.floor(Math.random() * 100)}`)
-    }
+  const headerElement = React.createElement('h1', null, 'Hello React world!');
 
-    console.log('App component rendered')
-
-    return (
-        <div>
-          <h1>Hello First React App!</h1>
-          <button id="button" onClick={onClickHandler}>
-            {buttonText}
-          </button>
-        </div>
-    )
-  }
+  console.log(headerElement)
 
   const container = document.getElementById('root');
   const root = ReactDOM.createRoot(container)
-  root.render(<App/>)
+
+  root.render(headerElement)
+
+  // const changeButtonText = (elementId) => {
+  //   const btn = document.getElementById(elementId);
+  //   btn.innerHTML = 'Hello vanilla JS!';
+  //   btn.className = 'btn-info';
+  // }
+  //
+  // const headerElement = document.createElement('h1');
+  // headerElement.innerHTML = 'Hello vanilla world!';
+  // document.getElementById('vanilla-js').append(headerElement);
 
 </script>
 
