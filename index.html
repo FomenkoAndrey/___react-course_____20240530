@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        name="viewport">
+  <meta content="ie=edge" http-equiv="X-UA-Compatible">
+  <title>Document</title>
+
+  <style>
+    .btn-info {
+      background-color: blue;
+      color: white;
+    }
+  </style>
+
+</head>
+<body>
+
+<div id="vanilla-js">
+  <button id="button" onclick="changeButtonText('button')">Click me</button>
+</div>
+
+
+<script>
+
+  const changeButtonText = (elementId) => {
+    const btn = document.getElementById(elementId);
+    btn.innerHTML = 'Hello vanilla JS!';
+    btn.className = 'btn-info';
+  }
+
+  const headerElement = document.createElement('h1');
+  headerElement.innerHTML = 'Hello vanilla world!';
+  document.getElementById('vanilla-js').append(headerElement);
+
+</script>
+
+</body>
+</html>
