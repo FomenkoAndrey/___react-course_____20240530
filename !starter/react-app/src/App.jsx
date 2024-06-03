@@ -1,5 +1,5 @@
-function App() {
-  return <h1>ReactJSX</h1>
+const App = () => {
+  return <div>App</div>
 }
 
 export default App
