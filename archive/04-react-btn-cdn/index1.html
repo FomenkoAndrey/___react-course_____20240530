@@ -23,7 +23,32 @@
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-<script src="main.js" type="text/babel"></script>
+<script type="text/babel">
+
+  const App = () => {
+    const [buttonText, setButtonText] = React.useState('Click me from useState')
+    const [classList, setClassList] = React.useState('')
+
+    const onClickHandler = () => {
+      setButtonText(`React clicked! ${Math.floor(Math.random() * 100)}`)
+      setClassList('btn-info')
+    }
+
+    return (
+        <div>
+          <h1>Hello First React App!</h1>
+          <button id="button" onClick={onClickHandler} className={classList}>
+            {buttonText}
+          </button>
+        </div>
+    )
+  }
+
+  const container = document.getElementById('root');
+  const root = ReactDOM.createRoot(container)
+  root.render(<App/>)
+
+</script>
 
 </body>
 </html>
