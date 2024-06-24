@@ -1,11 +1,5 @@
-import FooterLinks from './FooterLinks.tsx'
-
 const Footer = () => {
-  return (
-    <footer className="footer">
-      <FooterLinks />
-    </footer>
-  )
+  return <footer className="footer">@ Journal App - 2024</footer>
 }
 
 export default Footer
