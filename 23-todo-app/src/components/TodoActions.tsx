@@ -1,8 +1,16 @@
 import Button from './Button.tsx'
 import { RiCheckboxCircleLine, RiDeleteBin2Line } from 'react-icons/ri'
-import { ActionsPropsInterface } from '../types/ActionsProps.interface.ts'
+import { useContext } from 'react'
+import { TodoContext } from '../context/TodoContext.ts'
 
-const Actions = ({ deleteAllTodos, clearCompletedTodos, completedTodosExist }: ActionsPropsInterface) => {
+const TodoActions = () => {
+  const { deleteAllTodos, clearCompletedTodos, todos } = useContext(TodoContext)
+  const completedTodosExist = todos.some((todo) => todo.completed)
+
+  if (!todos.length) {
+    return null
+  }
+
   return (
     <div className="todos__actions">
       <Button title="Delete All Todos" onClick={() => deleteAllTodos()}>
@@ -15,4 +23,4 @@ const Actions = ({ deleteAllTodos, clearCompletedTodos, completedTodosExist }: A
   )
 }
 
-export default Actions
+export default TodoActions

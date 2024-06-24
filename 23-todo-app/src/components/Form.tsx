@@ -1,21 +1,20 @@
 import { v4 as uuidv4 } from 'uuid'
-import { FormPropsInterface } from '../types/FormProps.interface.ts'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useContext, useState } from 'react'
 import Button from './Button.tsx'
+import { TodoContext } from '../context/TodoContext.ts'
 
-const Form = ({ addTodo }: FormPropsInterface) => {
+const Form = () => {
+  const { addTodo } = useContext(TodoContext)
   const [title, setTitle] = useState('')
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    console.log('Form submitted...')
-
     addTodo({
       id: uuidv4(),
       title,
       completed: false
     })
+    setTitle('')
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,8 +23,8 @@ const Form = ({ addTodo }: FormPropsInterface) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" placeholder="Enter new todo..." onChange={handleInputChange} />
-      <Button type="submit" title="Submit form">
+      <input type="text" placeholder="Enter new todo..." value={title} onChange={handleInputChange} />
+      <Button type="submit" title="Submit form" disabled={!title.trim()}>
         Save
       </Button>
     </form>

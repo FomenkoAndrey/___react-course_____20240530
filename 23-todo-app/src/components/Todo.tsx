@@ -1,8 +1,11 @@
 import { TodoPropsInterface } from '../types/TodoProps.interface.ts'
 import { RiDeleteBin2Line, RiTodoFill } from 'react-icons/ri'
 import { FaCheck } from 'react-icons/fa6'
+import { useContext } from 'react'
+import { TodoContext } from '../context/TodoContext.ts'
 
-const Todo = ({ todo: { id, title, completed }, deleteTodo, toggleTodo }: TodoPropsInterface) => {
+const Todo = ({ todo: { id, title, completed } }: TodoPropsInterface) => {
+  const { deleteTodo, toggleTodo } = useContext(TodoContext)
   return (
     <div className={`todo${completed ? ' todo--completed' : ''}`}>
       <div className="todo__id">{id} </div>
