@@ -1,5 +1,7 @@
+import { v4 as uuidv4 } from 'uuid'
 import { FormPropsInterface } from '../types/FormProps.interface.ts'
 import { ChangeEvent, FormEvent, useState } from 'react'
+import Button from './Button.tsx'
 
 const Form = ({ addTodo }: FormPropsInterface) => {
   const [title, setTitle] = useState('')
@@ -10,7 +12,7 @@ const Form = ({ addTodo }: FormPropsInterface) => {
     console.log('Form submitted...')
 
     addTodo({
-      id: Date.now(),
+      id: uuidv4(),
       title,
       completed: false
     })
@@ -23,7 +25,9 @@ const Form = ({ addTodo }: FormPropsInterface) => {
   return (
     <form onSubmit={handleSubmit}>
       <input type="text" placeholder="Enter new todo..." onChange={handleInputChange} />
-      <button type="submit">Save</button>
+      <Button type="submit" title="Submit form">
+        Save
+      </Button>
     </form>
   )
 }

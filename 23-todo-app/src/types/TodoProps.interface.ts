@@ -2,6 +2,6 @@ import { TodoInterface } from './Todo.interface.ts'
 
 export interface TodoPropsInterface {
   todo: TodoInterface
-  deleteTodo: (id: number) => void
-  toggleTodo: (id: number) => void
+  deleteTodo: (id: string) => void
+  toggleTodo: (id: string) => void
 }
