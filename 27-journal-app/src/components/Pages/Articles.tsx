@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react'
 import { ArticleInterface } from '../../types/Article.interface.ts'
 import { fetchArticles } from '../../utils/api.ts'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSortField } from '../hooks/useSortField.ts'
+import { generateTitle } from '../../utils/generateTitle.ts'
+import { isValidSortField } from '../../utils/isValidSortKey.ts'
+import SortBlock from '../Common/SortBlock.tsx'
 
 const Articles = () => {
   const [articles, setArticles] = useState<ArticleInterface[]>([])
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
+  const { sortKey, sortQuery } = useSortField()
+  const navigate = useNavigate()
+
   useEffect(() => {
     const fetchDataAndHandleLoading = async () => {
       try {
         setIsLoading(true)
-        const data = await fetchArticles()
+        const data = isValidSortField(sortKey) ? await fetchArticles(sortKey) : await fetchArticles(null)
         setArticles(data)
         setError(null)
       } catch (error) {
@@ -23,11 +30,20 @@ const Articles = () => {
     }
 
     fetchDataAndHandleLoading()
-  }, [])
+  }, [sortKey])
+
+  useEffect(() => {
+    if (!isValidSortField(sortKey)) {
+      navigate('.')
+    }
+  }, [navigate, sortKey])
 
   return (
     <div>
-      <h1>Articles</h1>
+      <SortBlock />
+
+      <h1>Articles{generateTitle(sortKey)}</h1>
+
       <div>
         {isLoading && <p className="loading">Loading...</p>}
         {error && <p className="error">{error}</p>}
@@ -35,9 +51,8 @@ const Articles = () => {
           !error &&
           articles.map(({ id, title, slug }) => (
             <h2 key={id}>
-              {/*<Link to={`${slug}/${id}`} state={{ id }}>*/}
-              <Link to={`${slug}`} state={{ id }}>
-                {title}
+              <Link to={`${slug}/${id}`} state={{ id, sortQuery }}>
+                {id}. {title}
               </Link>
             </h2>
           ))}

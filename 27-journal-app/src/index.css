@@ -6,6 +6,7 @@
 
 body {
   font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  overflow-y: scroll;
 }
 
 a {
@@ -133,4 +134,14 @@ nav a.active {
   display: block;
   padding: 10px;
   background-color: white;
+}
+
+.sort-block {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.sort-block button {
+  padding: 0 10px;
 }

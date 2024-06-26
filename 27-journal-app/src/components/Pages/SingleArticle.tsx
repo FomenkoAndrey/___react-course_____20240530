@@ -1,31 +1,25 @@
 import { useEffect, useState } from 'react'
 import { ArticleInterface } from '../../types/Article.interface.ts'
 import { fetchSingleArticle } from '../../utils/api.ts'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 
 const SingleArticle = () => {
-  // const params = useParams()
-  const location = useLocation()
   const [article, setArticle] = useState<ArticleInterface>()
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const params = useParams()
+  const location = useLocation()
+  const { state } = location || {}
+  const { sortQuery } = state || {}
 
   useEffect(() => {
     const fetchDataAndHandleLoading = async () => {
       try {
         setIsLoading(true)
-        if (location.state) {
-          const { id } = location.state
-          if (id) {
-            const data = await fetchSingleArticle(id)
-            setArticle(data)
-            setError(null)
-          } else {
-            throw new Error('No article ID provided')
-          }
-        } else {
-          throw new Error('Location state is null')
-        }
+        const data = await fetchSingleArticle(`${params.id}`)
+        setArticle(data)
+        setError(null)
       } catch (error) {
         setError((error as Error).message)
       } finally {
@@ -34,7 +28,7 @@ const SingleArticle = () => {
     }
 
     fetchDataAndHandleLoading()
-  }, [location.state])
+  }, [params.id])
 
   return (
     <div>
@@ -49,7 +43,7 @@ const SingleArticle = () => {
           <hr />
           <p>{article.body}</p>
           <div className="link-xl">
-            <Link to="../.." relative="path">
+            <Link to={`../..${sortQuery}`} relative="path">
               All articles
             </Link>
           </div>
