@@ -14,6 +14,22 @@ a {
 
 h1 {
   text-align: center;
+  margin: 30px 0;
+}
+
+h1::first-letter,
+h2::first-letter,
+p::first-letter {
+  text-transform: uppercase;
+}
+
+h3 {
+  text-align: center;
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 nav {
@@ -39,6 +55,7 @@ nav a {
   padding: 15px 20px;
   line-height: 1;
   background-color: white;
+  border-radius: 7px;
 }
 
 nav a.active {
@@ -49,7 +66,13 @@ nav a.active {
 .activeLink {
   background-color: indigo;
   color: white;
+}
 
+.link-xl {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 40px 0;
 }
 
 .container {
@@ -67,10 +90,19 @@ nav a.active {
 .content-center {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.loading {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.not-found {
+  font-size: 20rem;
+}
 
 .header {
   min-height: 100px;
@@ -83,8 +115,10 @@ nav a.active {
 }
 
 .footer {
-  min-height: 70px;
-  background-color: lightblue;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer-links {

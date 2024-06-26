@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ArticleInterface } from '../../types/Article.interface.ts'
 import { fetchArticles } from '../../utils/api.ts'
+import { Link } from 'react-router-dom'
 
 const Articles = () => {
   const [articles, setArticles] = useState<ArticleInterface[]>([])
@@ -24,11 +25,25 @@ const Articles = () => {
     fetchDataAndHandleLoading()
   }, [])
 
-  console.log(articles)
-  console.log(error)
-  console.log(isLoading)
-
-  return <div>Articles</div>
+  return (
+    <div>
+      <h1>Articles</h1>
+      <div>
+        {isLoading && <p className="loading">Loading...</p>}
+        {error && <p className="error">{error}</p>}
+        {!isLoading &&
+          !error &&
+          articles.map(({ id, title, slug }) => (
+            <h2 key={id}>
+              {/*<Link to={`${slug}/${id}`} state={{ id }}>*/}
+              <Link to={`${slug}`} state={{ id }}>
+                {title}
+              </Link>
+            </h2>
+          ))}
+      </div>
+    </div>
+  )
 }
 
 export default Articles
