@@ -1,5 +1,4 @@
 import { Button } from 'react-bootstrap'
-import { ChangeEvent, FormEvent, useState } from 'react'
 import * as Yup from 'yup'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 
@@ -13,38 +12,38 @@ const validationSchema = Yup.object().shape({
 })
 
 const RegistrationForm = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [email, setEmail] = useState('')
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    switch (e.target.name) {
-      case 'username':
-        setUsername(e.target.value)
-        break
-      case 'password':
-        setPassword(e.target.value)
-        break
-      case 'confirmPassword':
-        setConfirmPassword(e.target.value)
-        break
-      case 'email':
-        setEmail(e.target.value)
-        break
-      default:
-        break
-    }
-  }
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (password !== confirmPassword) {
-      alert('Паролі не співпадають')
-      return
-    }
-    console.log({ username, password, email })
-  }
+  // const [username, setUsername] = useState('')
+  // const [password, setPassword] = useState('')
+  // const [confirmPassword, setConfirmPassword] = useState('')
+  // const [email, setEmail] = useState('')
+  //
+  // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   switch (e.target.name) {
+  //     case 'username':
+  //       setUsername(e.target.value)
+  //       break
+  //     case 'password':
+  //       setPassword(e.target.value)
+  //       break
+  //     case 'confirmPassword':
+  //       setConfirmPassword(e.target.value)
+  //       break
+  //     case 'email':
+  //       setEmail(e.target.value)
+  //       break
+  //     default:
+  //       break
+  //   }
+  // }
+  //
+  // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault()
+  //   if (password !== confirmPassword) {
+  //     alert('Паролі не співпадають')
+  //     return
+  //   }
+  //   console.log({ username, password, email })
+  // }
 
   return (
     <Formik
@@ -56,19 +55,12 @@ const RegistrationForm = () => {
       }}
     >
       {({ isSubmitting }) => (
-        <Form onSubmit={handleSubmit}>
+        <Form>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">
               Логін
             </label>
-            <Field
-              type="text"
-              placeholder="Введіть логін"
-              className="form-control"
-              name="username"
-              value={username}
-              onChange={handleInputChange}
-            />
+            <Field type="text" placeholder="Введіть логін" className="form-control" name="username" />
             <ErrorMessage name="username" component="div" className="text-danger" />
           </div>
 
@@ -76,42 +68,24 @@ const RegistrationForm = () => {
             <label htmlFor="password" className="form-label">
               Пароль
             </label>
-            <Field
-              type="password"
-              placeholder="Введіть пароль"
-              className="form-control"
-              name="password"
-              value={password}
-              onChange={handleInputChange}
-            />
+            <Field type="password" placeholder="Введіть пароль" className="form-control" name="password" />
+            <ErrorMessage name="password" component="div" className="text-danger" />
           </div>
 
           <div className="mb-3">
             <label htmlFor="confirmPassword" className="form-label">
               Підтвердження паролю
             </label>
-            <Field
-              type="password"
-              placeholder="Підтвердьте пароль"
-              className="form-control"
-              name="confirmPassword"
-              value={confirmPassword}
-              onChange={handleInputChange}
-            />
+            <Field type="password" placeholder="Підтвердьте пароль" className="form-control" name="confirmPassword" />
+            <ErrorMessage name="confirmPassword" component="div" className="text-danger" />
           </div>
 
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
               Email
             </label>
-            <Field
-              type="email"
-              placeholder="Введіть email"
-              className="form-control"
-              name="email"
-              value={email}
-              onChange={handleInputChange}
-            />
+            <Field type="email" placeholder="Введіть email" className="form-control" name="email" />
+            <ErrorMessage name="email" component="div" className="text-danger" />
           </div>
 
           <Button type="submit" variant="primary" disabled={isSubmitting}>
