@@ -13,14 +13,17 @@ export interface DatepickerProps {
 
 const Datepicker = ({ label, name, ...rest }: DatepickerProps) => {
   return (
-    <div>
-      <label htmlFor={name}>{label}</label>
+    <div className="flex flex-col space-y-2 mb-4">
+      <label htmlFor={name} className="font-bold text-sm text-gray-600">
+        {label}
+      </label>
       <Field id={name} type="text" name={name} {...rest}>
         {({ field, form }: any) => {
           const { setFieldValue } = form
           const { value } = field
           return (
             <ReactDatePicker
+              portalId="root-portal"
               id={name}
               {...field}
               {...rest}
@@ -29,6 +32,7 @@ const Datepicker = ({ label, name, ...rest }: DatepickerProps) => {
               onChange={(val) => setFieldValue(name, val)}
               locale={uk}
               dateFormat="dd.MM.yyyy"
+              className="border p-2 rounded min-w-[250px]"
             />
           )
         }}

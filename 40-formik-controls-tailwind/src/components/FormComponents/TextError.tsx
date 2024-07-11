@@ -5,7 +5,7 @@ interface TextErrorProps {
 }
 
 const TextError = ({ children }: TextErrorProps) => {
-  return <div>{children}</div>
+  return <div className="text-red-500 text-sm">{children}</div>
 }
 
 export default TextError

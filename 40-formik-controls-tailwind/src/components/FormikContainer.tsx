@@ -1,6 +1,7 @@
 import { Form, Formik } from 'formik'
 import FormikControl from './FormikControl.tsx'
 import * as Yup from 'yup'
+import Button from './FormComponents/Button.tsx'
 
 const selectOptions = [
   { key: 'Select an option', value: '' },
@@ -55,7 +56,7 @@ const FormikContainer = () => {
           <FormikControl control="radio" label="Radio group" name="radioOption" options={radioOptions} />
           <FormikControl control="checkbox" label="Checkbox group" name="checkboxOption" options={checkboxOptions} />
           <FormikControl control="date" label="Pick a date" name="date" placeholder="Pick a date..." />
-          <button type="submit">Submit</button>
+          <Button type="submit" text="Submit" />
         </Form>
       )}
     </Formik>

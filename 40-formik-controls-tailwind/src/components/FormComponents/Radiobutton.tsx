@@ -1,4 +1,4 @@
-import { ErrorMessage, Field, FieldInputProps } from 'formik'
+import { ErrorMessage, Field, FieldProps } from 'formik'
 import TextError from './TextError.tsx'
 
 export interface RadiobuttonOption {
@@ -16,22 +16,25 @@ export interface RadiobuttonProps {
 
 const Radiobutton = ({ label, name, options, ...rest }: RadiobuttonProps) => {
   return (
-    <fieldset>
-      <legend>{label}</legend>
-      <div>
+    <fieldset className="flex flex-col space-y-2 mb-4">
+      <legend className="font-bold text-sm text-gray-600">{label}</legend>
+      <div className="flex space-x-6">
         <Field name={name} {...rest}>
-          {({ field }: { field: FieldInputProps<any> }) => {
+          {({ field }: FieldProps) => {
             return options.map((option: RadiobuttonOption) => {
               return (
-                <div key={option.value}>
+                <div key={option.value} className="flex items-center">
                   <input
                     type="radio"
                     id={option.value}
                     {...field}
                     value={option.value}
                     checked={field.value === option.value}
+                    className="mr-1.5"
                   />
-                  <label htmlFor={option.value}>{option.key}</label>
+                  <label htmlFor={option.value} className="text-sm text-gray-600">
+                    {option.key}
+                  </label>
                 </div>
               )
             })
