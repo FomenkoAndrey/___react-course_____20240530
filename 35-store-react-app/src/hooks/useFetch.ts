@@ -1,22 +1,20 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export const useFetch = <T>(url: string, limit?: number) => {
+export const useFetch = <T>(url: string, limit?: number, reload?: string) => {
   const [data, setData] = useState<T[]>([])
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const cancelTokenSource = useRef(axios.CancelToken.source())
-
   useEffect(() => {
-    const currentCancelTokenSource = cancelTokenSource.current
-
     const fetchData = async () => {
+      const cancelToken = axios.CancelToken.source()
       setIsLoading(true)
+      console.log(url)
       try {
         await new Promise((resolve) => setTimeout(resolve, 100))
         const response = await axios.get<T[]>(limit ? `${url}?_limit=${limit}` : url, {
-          cancelToken: currentCancelTokenSource.token
+          cancelToken: cancelToken.token
         })
 
         if (response?.status !== 200) {
@@ -35,7 +33,7 @@ export const useFetch = <T>(url: string, limit?: number) => {
       }
     }
     fetchData().catch((err) => console.error('Error fetching data', err.message))
-  }, [])
+  }, [url, limit, reload])
 
   return { data, error, isLoading }
 }
