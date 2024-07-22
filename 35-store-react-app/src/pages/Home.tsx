@@ -40,7 +40,7 @@ const Home = () => {
           <ul className="products-list">
             {!!products.length &&
               products.map((product: ProductInterface) => (
-                <Product product={product} reload={() => setReload(product.id)} key={product.id} />
+                <Product product={product} reload={() => setReload(product.id + Date.now())} key={product.id} />
               ))}
           </ul>
         </div>

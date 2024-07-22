@@ -4,6 +4,7 @@ import ProductForm from './ProductForm.tsx'
 import { ProductInterface } from '../types/Product.interface.ts'
 import { useAdd } from '../hooks/useAdd.ts'
 import { API_URL } from '../utils/mockApi.ts'
+import { INITIAL_PRODUCT } from '../data/mockData.ts'
 
 const AddProductButton = () => {
   const [showModal, setShowModal] = useState(false)
@@ -32,7 +33,7 @@ const AddProductButton = () => {
         <Modal onClose={handleClose}>
           <h2 className="modal__title">Add a new product</h2>
           {error && <p className="error">{error}</p>}
-          <ProductForm onSubmit={handleSubmit} />
+          <ProductForm onSubmit={handleSubmit} product={INITIAL_PRODUCT} />
         </Modal>
       )}
     </>

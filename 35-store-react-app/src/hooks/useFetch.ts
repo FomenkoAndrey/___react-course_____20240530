@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export const useFetch = <T>(url: string, limit?: number, reload?: string) => {
+  console.log(reload)
+
   const [data, setData] = useState<T[]>([])
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)

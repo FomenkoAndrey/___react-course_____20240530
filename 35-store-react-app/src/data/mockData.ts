@@ -5,7 +5,7 @@ export const PRODUCT_CATEGORIES: string[] = [
   'Smartphones',
   'Cameras',
   'Headphones',
-  'Accessories',
+  'Accessories and Peripherals',
   'Software',
   'Monitors',
   'Graphics Cards'
