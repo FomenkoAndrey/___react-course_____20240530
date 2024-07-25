@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.foo-bar {
+  background-color: #4a4e69; /* Темно-сірий колір фону */
+  color: #f2e9e4; /* Колір тексту */
+  padding: 16px; /* Відступ всередині сповіщення */
+  border-radius: 8px; /* Закруглення кутів сповіщення */
+  border: 1px solid #9a8c98; /* Колір рамки */
+  font-family: 'Arial', sans-serif; /* Шрифт */
+  font-size: 14px; /* Розмір шрифту */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тінь для сповіщення */
+}
+
+.button-style {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 7px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: block;
+  margin-top: 10px;
+  margin-left: auto;
+}
