@@ -1,6 +1,6 @@
-import { ProductInterface } from '../types/Product.interface.ts'
+import { ProductInterface } from '../../types/Product.interface.ts'
 import { FormEvent, useState } from 'react'
-import { PRODUCT_CATEGORIES } from '../data/mockData.ts'
+import { PRODUCT_CATEGORIES } from '../../data/mockData.ts'
 import InputField from './InputField.tsx'
 import SelectField from './SelectField.tsx'
 
@@ -12,7 +12,7 @@ interface ProductFormPropsInterface {
 const ProductForm = ({ onSubmit, product }: ProductFormPropsInterface) => {
   const [name, setName] = useState(product.name as string)
   const [description, setDescription] = useState(product.description as string)
-  const [price, setPrice] = useState(product.price as string)
+  const [price, setPrice] = useState(product.price as number)
   const [image, setImage] = useState(product.image as string)
   const [category, setCategory] = useState(product.category as string)
 
@@ -48,8 +48,8 @@ const ProductForm = ({ onSubmit, product }: ProductFormPropsInterface) => {
       <InputField
         id="price"
         type="number"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
+        value={`${price}`}
+        onChange={(e) => setPrice(+e.target.value)}
         placeholder="Price..."
       />
       <InputField

@@ -2,7 +2,7 @@ import { ReactNode, useState } from 'react'
 import { ProductInterface } from '../types/Product.interface.ts'
 import { API_URL } from '../utils/mockApi.ts'
 import Modal from '../modals/Modal.tsx'
-import ProductForm from './ProductForm.tsx'
+import ProductForm from './form/ProductForm.tsx'
 import { useUpdate } from '../hooks/useUpdate.ts'
 
 interface EditProductButtonPropsInterface {
@@ -11,7 +11,7 @@ interface EditProductButtonPropsInterface {
   reload: () => void
 }
 
-const EditProductButton = ({ children, product, reload }: EditProductButtonPropsInterface) => {
+const EditProduct = ({ children, product, reload }: EditProductButtonPropsInterface) => {
   const [showModal, setShowModal] = useState(false)
   const { update, error } = useUpdate(API_URL)
 
@@ -20,8 +20,7 @@ const EditProductButton = ({ children, product, reload }: EditProductButtonProps
 
   const handleSubmit = async (product: Partial<ProductInterface>) => {
     try {
-      const updatedProduct = await update(product as ProductInterface)
-      console.log(updatedProduct)
+      await update(product as ProductInterface)
       handleClose()
       reload()
     } catch (error) {
@@ -48,4 +47,4 @@ const EditProductButton = ({ children, product, reload }: EditProductButtonProps
   )
 }
 
-export default EditProductButton
+export default EditProduct

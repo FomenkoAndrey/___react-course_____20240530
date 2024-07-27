@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import Modal from '../modals/Modal.tsx'
-import ProductForm from './ProductForm.tsx'
+import ProductForm from './form/ProductForm.tsx'
 import { ProductInterface } from '../types/Product.interface.ts'
 import { useAdd } from '../hooks/useAdd.ts'
 import { API_URL } from '../utils/mockApi.ts'
 import { INITIAL_PRODUCT } from '../data/mockData.ts'
 
-const AddProductButton = () => {
+const AddProduct = () => {
   const [showModal, setShowModal] = useState(false)
   const { add, error } = useAdd(API_URL)
 
@@ -40,4 +40,4 @@ const AddProductButton = () => {
   )
 }
 
-export default AddProductButton
+export default AddProduct

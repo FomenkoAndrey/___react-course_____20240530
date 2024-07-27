@@ -1,8 +1,18 @@
-import { useFetch } from '../hooks/useFetch.ts'
 import { UserInterface } from '../types/User.interface.ts'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch } from '../redux/store.ts'
+import { fetchAllUsers, selectUsers, selectUsersError, selectUsersLoading } from '../redux/userSlice.ts'
 
 const Users = () => {
-  const { data: users, error, isLoading } = useFetch<UserInterface>('https://jsonplaceholder.typicode.com/users')
+  const dispatch = useDispatch<AppDispatch>()
+  const users = useSelector(selectUsers)
+  const isLoading = useSelector(selectUsersLoading)
+  const error = useSelector(selectUsersError)
+
+  useEffect(() => {
+    dispatch(fetchAllUsers('https://jsonplaceholder.typicode.com/users'))
+  }, [dispatch])
 
   return (
     <div>
