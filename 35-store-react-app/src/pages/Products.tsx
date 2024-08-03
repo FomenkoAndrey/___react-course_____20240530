@@ -1,7 +1,6 @@
-import { useFetch } from '../hooks/useFetch.ts'
 import { ProductInterface } from '../types/Product.interface.ts'
 import { API_ITEMS_PER_PAGE_LIMIT, createUrl } from '../utils/mockApi.ts'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Product from '../components/Product.tsx'
 import AddProduct from '../components/AddProduct.tsx'
 import { debounce } from '../utils/debounce.ts'
@@ -9,6 +8,9 @@ import { ORDER_BY_LIST, SORT_BY_LIST } from '../data/mockData.ts'
 import { MdRefresh } from 'react-icons/md'
 import InputField from '../components/form/InputField.tsx'
 import SelectField from '../components/form/SelectField.tsx'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '../redux/store.ts'
+import { fetchAllProducts, selectProducts, selectProductsError, selectProductsLoading } from '../redux/productsSlice.ts'
 
 const Products = () => {
   const [page, setPage] = useState(1)
@@ -19,11 +21,15 @@ const Products = () => {
 
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const {
-    data: products,
-    error,
-    isLoading
-  } = useFetch<ProductInterface>(createUrl(page, name, sort, order), undefined, reload)
+  const dispatch = useDispatch<AppDispatch>()
+  const products = useSelector(selectProducts)
+  const isLoading = useSelector(selectProductsLoading)
+  const error = useSelector(selectProductsError)
+  const { isLogged } = useSelector((state: RootState) => state.auth)
+
+  useEffect(() => {
+    dispatch(fetchAllProducts(createUrl(page, name, sort, order)))
+  }, [dispatch, page, name, sort, order, reload])
 
   const debouncedSetName = debounce(setName, 1000)
 
@@ -45,8 +51,8 @@ const Products = () => {
           placeholder="Filter products by name..."
           onChange={(e) => debouncedSetName(e.target.value)}
         />
-        <SelectField id={sort} value={sort} onChange={(e) => setSort(e.target.value)} options={SORT_BY_LIST} />
-        <SelectField id={order} value={order} onChange={(e) => setOrder(e.target.value)} options={ORDER_BY_LIST} />
+        <SelectField id="sort" value={sort} onChange={(e) => setSort(e.target.value)} options={SORT_BY_LIST} />
+        <SelectField id="order" value={order} onChange={(e) => setOrder(e.target.value)} options={ORDER_BY_LIST} />
         <button onClick={resetFilters}>
           <MdRefresh />
         </button>
@@ -56,7 +62,7 @@ const Products = () => {
       {!isLoading && !error && (
         <div className="content">
           <div className="buttons-group">
-            <AddProduct />
+            {isLogged && <AddProduct />}
             <div className="pagination">
               <button
                 className="pagination__btn"

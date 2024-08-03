@@ -10,6 +10,9 @@ interface SelectFieldPropsInterface {
 }
 
 const SelectField = ({ id, value, onChange, options, required = true }: SelectFieldPropsInterface) => {
+  console.log(id)
+  console.log(value)
+
   return (
     <div className="form-group">
       <label className="form-label" htmlFor="category">
