@@ -1,9 +1,9 @@
-import { FC, useRef } from 'react'
+import { useRef } from 'react'
 import SearchInput from './components/SearchInput.tsx'
 import Results from './components/Results.tsx'
 import { useGithubSearch } from './hooks/useGithubSearch.ts'
 
-const App: FC = () => {
+const App = () => {
   const inputRef = useRef<HTMLInputElement>(null)
   const results = useGithubSearch(inputRef)
 
